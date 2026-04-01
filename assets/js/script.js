@@ -103,8 +103,9 @@ for (let i = 0; i < filterBtn.length; i++) {
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
+const formResult = document.getElementById("form-result");
 
-// add event to all form input field
+// enable/disable submit button based on validation
 for (let i = 0; i < formInputs.length; i++) {
   formInputs[i].addEventListener("input", function () {
     if (form.checkValidity()) {
@@ -114,6 +115,42 @@ for (let i = 0; i < formInputs.length; i++) {
     }
   });
 }
+
+// handle form submission via fetch (no page redirect)
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  formBtn.setAttribute("disabled", "");
+  formBtn.querySelector("span").textContent = "Sending…";
+
+  const data = new FormData(form);
+
+  fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    body: data
+  })
+    .then(res => res.json())
+    .then(json => {
+      formResult.style.display = "block";
+      if (json.success) {
+        formResult.style.color = "#7b9e87";
+        formResult.textContent = "✓ Message sent! I'll get back to you soon.";
+        form.reset();
+        formBtn.setAttribute("disabled", "");
+      } else {
+        formResult.style.color = "#e06c75";
+        formResult.textContent = "✗ Something went wrong. Please try again.";
+        formBtn.removeAttribute("disabled");
+      }
+      formBtn.querySelector("span").textContent = "Send Message";
+    })
+    .catch(() => {
+      formResult.style.display = "block";
+      formResult.style.color = "#e06c75";
+      formResult.textContent = "✗ Network error. Please try again.";
+      formBtn.removeAttribute("disabled");
+      formBtn.querySelector("span").textContent = "Send Message";
+    });
+});
 
 
 

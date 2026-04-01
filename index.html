@@ -363,10 +363,15 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
+          <form action="https://api.web3forms.com/submit" method="POST" class="form" data-form>
+
+            <input type="hidden" name="access_key" value="53ae550c-41ac-4e93-bb4e-986b6ddb9053">
+            <input type="hidden" name="subject" value="New message from mengliang10.github.io">
+            <input type="hidden" name="from_name" value="Portfolio Contact Form">
+            <input type="checkbox" name="botcheck" style="display:none;">
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="text" name="name" class="form-input" placeholder="Full name" required data-form-input>
               <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
             </div>
 
@@ -378,6 +383,8 @@
             </button>
 
           </form>
+
+          <p id="form-result" style="margin-top: 16px; font-size: 14px; display: none;"></p>
 
         </section>
 
