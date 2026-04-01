@@ -242,6 +242,7 @@ article.active {
 .article-title {
   position: relative;
   padding-bottom: 7px;
+  margin-top: 25px;
 }
 
 .article-title::after {
