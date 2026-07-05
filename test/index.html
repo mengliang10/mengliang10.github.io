@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive JavaScript Visualization Showcase — Meng Liang</title>
+
+  <link rel="shortcut icon" href="../assets/images/logo.ico" type="image/x-icon">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js & Theme CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+  
+  <style>
+    /* ========== CUSTOM VISUALIZATION THEME ========== */
+    :root {
+      --bg-primary: #050811;
+      --bg-secondary: #0d111d;
+      --bg-card: #161c2e;
+      --accent: #10b981; /* Emerald */
+      --accent-gold: #f59e0b; /* Amber */
+      --accent-blue: #3b82f6; /* Blue */
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --border: #1e293b;
+    }
+
+    html, body {
+      background-color: var(--bg-primary);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Interactive Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.45;
+    }
+
+    .reveal {
+      position: relative;
+      z-index: 2;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .reveal h1 {
+      font-size: 2.5em;
+      line-height: 1.15;
+      text-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .reveal h2 {
+      font-size: 1.6em;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .reveal h3 {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      color: var(--accent-gold);
+      text-align: left;
+    }
+
+    .reveal p, .reveal li {
+      font-size: 0.85em;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* Flex Layout containers for visualizations */
+    .viz-container {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      text-align: left;
+      height: 520px;
+    }
+
+    .col-text {
+      flex: 1.2;
+    }
+
+    .col-graph {
+      flex: 1.8;
+      background: rgba(13, 17, 29, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 15px;
+      box-sizing: border-box;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #plotly-div {
+      width: 100%;
+      height: 100%;
+    }
+
+    #d3-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Math Formulas style */
+    .math-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .math-card h4 {
+      color: var(--accent);
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .math-card p {
+      font-size: 0.8em;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .math-formula {
+      font-size: 1.25em;
+      color: var(--text-primary);
+      text-align: center;
+      padding: 10px;
+      background: rgba(5, 8, 17, 0.5);
+      border-radius: 8px;
+    }
+
+    /* Mermaid container */
+    .mermaid-box {
+      width: 100%;
+      background: rgba(13, 17, 29, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Back Home Floating Button */
+    .back-home {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      padding: 8px 18px;
+      color: var(--accent);
+      font-size: 0.8em;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+
+    .back-home:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+  </style>
+
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+  <!-- D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <!-- MathJax -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      },
+      CommonHTML: { linebreaks: { automatic: true } },
+      "HTML-CSS": { linebreaks: { automatic: true } },
+      SVG: { linebreaks: { automatic: true } }
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <!-- Mermaid.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.2.4/mermaid.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Floating Navigation -->
+  <a href="../" class="back-home">← Back to Portfolio</a>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ==========================================
+           SLIDE 1: Title
+           ========================================== -->
+      <section>
+        <h1 style="margin-bottom: 20px;">Interactive JS<br><span class="accent-color">Visualization Showcase</span></h1>
+        <p style="max-width: 700px; margin: 0 auto 30px; font-size: 0.95em;">
+          A real-time visual demonstration of interactive computing libraries integrated directly into a widescreen Reveal.js presentation format.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 0.8em; color: var(--text-secondary);">
+          <span>📊 Plotly 3D</span>
+          <span>&middot;</span>
+          <span>🕸️ D3 Network</span>
+          <span>&middot;</span>
+          <span>📐 MathJax TeX</span>
+          <span>&middot;</span>
+          <span>🧬 Mermaid SVG</span>
+        </div>
+        <p class="gold-color" style="font-size: 0.8em; margin-top: 50px;">Use your keyboard right arrow → to begin</p>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 2: Plotly.js 3D Volatility Surface
+           ========================================== -->
+      <section>
+        <h2>Plotly.js: 3D Volatility Surface</h2>
+        <div class="viz-container">
+          <div class="col-text">
+            <h3>Quantitative Modeling</h3>
+            <p style="margin-bottom: 15px;">
+              Visualizing an Options Implied Volatility Surface. Strike prices are mapped against Time-to-Expiry to model the volatility smile curve in three dimensions.
+            </p>
+            <ul style="padding-left: 20px; font-size: 0.8em;">
+              <li style="margin-bottom: 8px;"><strong>Interactive Rotations:</strong> Drag your mouse over the 3D surface plot to rotate, pan, or zoom in real-time.</li>
+              <li style="margin-bottom: 8px;"><strong>Asymmetry &amp; Smile:</strong> Shows higher implied volatility for out-of-the-money (OTM) puts, characteristic of equity options.</li>
+              <li style="margin-bottom: 8px;"><strong>Term Structure:</strong> The volatility curvature flattens out as expiry time ($t$) increases.</li>
+            </ul>
+          </div>
+          <div class="col-graph">
+            <div id="plotly-div"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 3: D3.js Force-Directed Graph
+           ========================================== -->
+      <section>
+        <h2>D3.js: Interactive Entity Graph</h2>
+        <div class="viz-container">
+          <div class="col-text">
+            <h3>MarTech Knowledge Graph</h3>
+            <p style="margin-bottom: 15px;">
+              A force-directed network diagram showing nodes (entities) and links (ontological connections) within a system.
+            </p>
+            <ul style="padding-left: 20px; font-size: 0.8em;">
+              <li style="margin-bottom: 8px;"><strong>Draggable Nodes:</strong> Click and drag any node to test the elastic gravity simulation in D3.</li>
+              <li style="margin-bottom: 8px;"><strong>Interactive Zoom:</strong> Double-click to zoom in, or scroll your mouse wheel to zoom/pan.</li>
+              <li style="margin-bottom: 8px;"><strong>Ontology mapping:</strong> Demonstrates node links between platforms, databases, and metrics.</li>
+            </ul>
+          </div>
+          <div class="col-graph" style="background: rgba(13, 17, 29, 0.95);">
+            <svg id="d3-svg"></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 4: MathJax Equations
+           ========================================== -->
+      <section>
+        <h2>MathJax: Equation Typesetting</h2>
+        <div style="text-align: left; margin-bottom: 20px;">
+          <p>Render mathematical formulations dynamically using LaTeX syntax. Enables clean, scalable mathematics across all screens.</p>
+        </div>
+        
+        <div class="slide-layout-grid">
+          <div class="math-card">
+            <h4>Black-Scholes Option Pricing PDE</h4>
+            <p>Describes the pricing of derivative financial contracts over time.</p>
+            <div class="math-formula">
+              $$\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + r S \frac{\partial V}{\partial S} - r V = 0$$
+            </div>
+          </div>
+          
+          <div class="math-card">
+            <h4>Kelly Sizing Allocation</h4>
+            <p>Optimal allocation of investment capital to maximize growth rate under risk.</p>
+            <div class="math-formula">
+              $$f_i^* = p_i - \frac{1 - p_i}{\text{ROAS}_i}$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 5: Mermaid.js Workflow
+           ========================================== -->
+      <section>
+        <h2>Mermaid.js: Automated Diagrams</h2>
+        <div class="viz-container">
+          <div class="col-text" style="flex: 1;">
+            <h3>Dynamic SVG Generation</h3>
+            <p style="margin-bottom: 15px;">
+              Mermaid parses a simple text description and renders full-vector SVG diagrams dynamically inside the slide.
+            </p>
+            <p style="font-size: 0.8em;">
+              This diagram shows a typical quantitative event scoring pipeline. By using Mermaid, workflows remain fully editable as code rather than baked-in image files.
+            </p>
+          </div>
+          <div class="col-graph" style="flex: 2; padding: 30px;">
+            <div class="mermaid">
+              graph TD
+                A[Raw Input Scraper] -->|OCR Extraction| B(Local Markdown Files)
+                B -->|Vector Branch| C[1536-dim Vector Embeddings]
+                B -->|Graph Branch| D[LLM Entity JSON-LD Parser]
+                C --> E[(ArcadeDB Storage)]
+                D --> E
+                E -->|Graph RAG Query| F[Decision Compiler]
+                F -->|Execution Sizing| G[Broker API Output]
+                
+                style E fill:#10b98122,stroke:#10b981,stroke-width:2px;
+                style F fill:#f59e0b22,stroke:#f59e0b,stroke-width:2px;
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+
+  <script>
+    // Initialize Reveal.js
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      transition: 'slide',
+      width: 1150,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0
+    });
+
+    // ========== PLOTLY 3D SURFACE PLOT ==========
+    function drawPlotlySurface() {
+      let strikes = [];
+      let expiries = [];
+      let iv = [];
+
+      // Generate volatility surface data
+      for (let i = 0; i < 30; i++) {
+        strikes.push(80 + i * 1.33); // Strike from 80 to 120
+      }
+      for (let j = 0; j < 20; j++) {
+        expiries.push(0.1 + j * 0.1); // Expiry from 0.1 to 2.0
+      }
+
+      for (let j = 0; j < expiries.length; j++) {
+        let row = [];
+        let t = expiries[j];
+        for (let i = 0; i < strikes.length; i++) {
+          let k = strikes[i];
+          // Parabolic smile + term structure skew
+          let val = 0.18 + 0.05 * Math.pow(k - 100, 2) / 400 + 0.03 / Math.sqrt(t);
+          row.push(val);
+        }
+        iv.push(row);
+      }
+
+      let data = [{
+        z: iv,
+        x: strikes,
+        y: expiries,
+        type: 'surface',
+        colorscale: 'Viridis',
+        showscale: false
+      }];
+
+      let layout = {
+        title: {
+          text: 'Implied Volatility Surface smile',
+          font: { color: '#f3f4f6', size: 14 }
+        },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        margin: { l: 0, r: 0, b: 0, t: 40 },
+        scene: {
+          xaxis: { title: 'Strike ($)', titlefont: { color: '#9ca3af' }, tickfont: { color: '#6b7280' }, gridcolor: '#1e293b' },
+          yaxis: { title: 'Expiry (yrs)', titlefont: { color: '#9ca3af' }, tickfont: { color: '#6b7280' }, gridcolor: '#1e293b' },
+          zaxis: { title: 'Implied Vol (IV)', titlefont: { color: '#9ca3af' }, tickfont: { color: '#6b7280' }, gridcolor: '#1e293b' }
+        }
+      };
+
+      Plotly.newPlot('plotly-div', data, layout, { displayModeBar: false });
+    }
+
+    // ========== D3.JS FORCE DIRECTED GRAPH ==========
+    let d3Simulation;
+    function drawD3Network() {
+      const svg = d3.select("#d3-svg");
+      svg.selectAll("*").remove(); // Clear previous drawing
+
+      const width = document.getElementById("d3-svg").clientWidth || 600;
+      const height = document.getElementById("d3-svg").clientHeight || 500;
+
+      // Group colors
+      const colorScale = d3.scaleOrdinal()
+        .domain([1, 2, 3, 4, 5, 6])
+        .range(["#f59e0b", "#10b981", "#3b82f6", "#8b5cf6", "#ec4899", "#ef4444"]);
+
+      const nodes = [
+        { id: "Meng Liang", group: 1, size: 24 },
+        { id: "MarTech", group: 2, size: 16 },
+        { id: "Applied AI", group: 2, size: 16 },
+        { id: "SEO", group: 3, size: 12 },
+        { id: "GEO", group: 3, size: 12 },
+        { id: "AIO", group: 3, size: 12 },
+        { id: "ArcadeDB", group: 4, size: 14 },
+        { id: "Graph RAG", group: 4, size: 14 },
+        { id: "CDP", group: 5, size: 14 },
+        { id: "ML Bidding", group: 6, size: 14 }
+      ];
+
+      const links = [
+        { source: "Meng Liang", target: "MarTech" },
+        { source: "Meng Liang", target: "Applied AI" },
+        { source: "MarTech", target: "SEO" },
+        { source: "MarTech", target: "CDP" },
+        { source: "Applied AI", target: "GEO" },
+        { source: "Applied AI", target: "AIO" },
+        { source: "Applied AI", target: "ML Bidding" },
+        { source: "GEO", target: "Graph RAG" },
+        { source: "Graph RAG", target: "ArcadeDB" },
+        { source: "AIO", target: "ArcadeDB" }
+      ];
+
+      d3Simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.id).distance(80))
+        .force("charge", d3.forceManyBody().strength(-200))
+        .force("center", d3.forceCenter(width / 2, height / 2));
+
+      // Drag behaviors
+      function dragstarted(event, d) {
+        if (!event.active) d3Simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+      function dragended(event, d) {
+        if (!event.active) d3Simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      // Draw link lines
+      const link = svg.append("g")
+        .attr("stroke", "#1e293b")
+        .attr("stroke-opacity", 0.6)
+        .selectAll("line")
+        .data(links)
+        .join("line")
+        .attr("stroke-width", 2);
+
+      // Draw node circles
+      const node = svg.append("g")
+        .selectAll("g")
+        .data(nodes)
+        .join("g")
+        .call(d3.drag()
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended));
+
+      node.append("circle")
+        .attr("r", d => d.size)
+        .attr("fill", d => colorScale(d.group))
+        .attr("stroke", "#050811")
+        .attr("stroke-width", 2)
+        .style("cursor", "grab")
+        .attr("filter", "drop-shadow(0px 0px 4px rgba(255,255,255,0.1))");
+
+      // Draw labels
+      node.append("text")
+        .text(d => d.id)
+        .attr("x", 0)
+        .attr("y", d => d.size + 15)
+        .attr("text-anchor", "middle")
+        .attr("fill", "#f3f4f6")
+        .style("font-size", "10px")
+        .style("font-family", "'DM Sans', sans-serif")
+        .style("pointer-events", "none");
+
+      d3Simulation.on("tick", () => {
+        link
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+        node
+          .attr("transform", d => `translate(${d.x},${d.y})`);
+      });
+    }
+
+    // ========== BACKGROUND CANVAS CONSTELLATION ANIMATION ==========
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let points = [];
+    const maxPoints = 65;
+    let mouse = { x: null, y: null };
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    window.addEventListener('mouseout', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Point {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 2 + 1;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce walls
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        // Pull to mouse
+        if (mouse.x && mouse.y) {
+          let dx = mouse.x - this.x;
+          let dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 180) {
+            this.x += dx * 0.008;
+            this.y += dy * 0.008;
+          }
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#10b981';
+        ctx.fill();
+      }
+    }
+
+    function initCanvas() {
+      resizeCanvas();
+      points = [];
+      for (let i = 0; i < maxPoints; i++) {
+        points.push(new Point());
+      }
+      animateCanvas();
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update & Draw points
+      for (let i = 0; i < points.length; i++) {
+        points[i].update();
+        points[i].draw();
+      }
+
+      // Draw connection lines
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          let dx = points[i].x - points[j].x;
+          let dy = points[i].y - points[j].y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(points[i].x, points[i].y);
+            ctx.lineTo(points[j].x, points[j].y);
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.15 * (1 - dist / 100)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+
+    // Initialize systems on load
+    window.addEventListener('load', () => {
+      initCanvas();
+      mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    });
+
+    // Trigger visualizer updates on slide changed
+    Reveal.on('slidechanged', event => {
+      if (event.indexh === 1) {
+        // Plotly slide
+        setTimeout(drawPlotlySurface, 100);
+      } else if (event.indexh === 2) {
+        // D3 slide
+        setTimeout(drawD3Network, 100);
+      }
+    });
+
+    // Initial load check if starting on plot/graph slide
+    Reveal.on('ready', () => {
+      if (Reveal.getIndices().h === 1) drawPlotlySurface();
+      if (Reveal.getIndices().h === 2) drawD3Network();
+    });
+  </script>
+</body>
+
+</html>
