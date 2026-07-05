@@ -8,1070 +8,995 @@
   <title>Meng Liang — APAC Digital Growth &amp; MarTech Leader | Fractional SEO · GEO · AIO</title>
 
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
-  <link rel="stylesheet" href="./assets/css/style.css">
-
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+  
+  <style>
+    /* ========== CUSTOM THEME ========== */
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --accent: #10b981; /* Emerald / Teal */
+      --accent-gold: #f59e0b; /* Amber / Gold */
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --border: #1f2937;
+      --border-glow: #10b98133;
+    }
+
+    /* Reset & reveal overrides */
+    html, body {
+      background-color: var(--bg-primary);
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .reveal {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* Dot grid background */
+    .dot-bg {
+      background-image: radial-gradient(circle, rgba(156, 163, 175, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-primary);
+      text-transform: none;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .reveal h1 {
+      font-size: 2.8em;
+      line-height: 1.15;
+    }
+
+    .reveal h2 {
+      font-size: 1.8em;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .reveal h3 {
+      font-size: 1.3em;
+      color: var(--text-primary);
+    }
+
+    .reveal h4 {
+      font-size: 1.1em;
+      color: var(--accent-gold);
+    }
+
+    .reveal p, .reveal li {
+      font-size: 0.9em;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .reveal a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .reveal a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* Custom Navigation Bar */
+    .custom-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.25em;
+      color: var(--text-primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.85em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent);
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Widescreen Slides Layout */
+    .slide-layout-split {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      text-align: left;
+      height: 100%;
+    }
+
+    .col-left {
+      flex: 1.2;
+    }
+
+    .col-right {
+      flex: 1.8;
+    }
+
+    .slide-layout-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+      text-align: left;
+    }
+
+    /* Cards */
+    .profile-card {
+      background: linear-gradient(to bottom right, var(--bg-secondary), var(--bg-card));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .profile-title {
+      font-size: 0.8em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 15px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .contact-icon {
+      color: var(--accent);
+      font-size: 1.2em;
+    }
+
+    .contact-info p {
+      margin: 0;
+      font-size: 0.75em;
+      color: var(--text-muted);
+    }
+
+    .contact-info span, .contact-info a {
+      font-size: 0.85em;
+      color: var(--text-primary);
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 20px;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--accent-gold);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .stat-lbl {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tag-pill {
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 50px;
+      font-size: 0.7em;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .tag-pill.sec {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .service-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: var(--border-glow);
+    }
+
+    .service-card h3 {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      font-size: 0.8em;
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .experience-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 25px;
+      text-align: left;
+    }
+
+    .experience-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .experience-card h3 {
+      font-size: 1.25em;
+    }
+
+    .experience-card .date {
+      font-size: 0.75em;
+      color: var(--accent-gold);
+      font-weight: 600;
+      padding: 2px 8px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+    }
+
+    .experience-card ul {
+      margin: 0;
+      padding-left: 15px;
+    }
+
+    .experience-card li {
+      font-size: 0.8em;
+      margin-bottom: 6px;
+    }
+
+    .project-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: left;
+    }
+
+    .project-card-detail {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .project-card-detail h3 {
+      font-size: 1.05em;
+      margin-bottom: 8px;
+    }
+
+    .project-card-detail p {
+      font-size: 0.78em;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .project-card-detail .metrics {
+      font-size: 0.8em;
+      font-weight: 700;
+      color: var(--accent);
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+    .blog-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      text-align: left;
+    }
+
+    .blog-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .blog-item-meta {
+      font-size: 0.75em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .blog-item h3 {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+    }
+
+    .blog-item p {
+      font-size: 0.8em;
+      margin: 0;
+    }
+
+    /* Contact Form Styles */
+    .contact-form {
+      text-align: left;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85em;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .form-textarea {
+      width: 100%;
+      height: 120px;
+      resize: none;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85em;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    .form-textarea:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .form-btn {
+      background: linear-gradient(135deg, var(--accent), #14b8a6);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-weight: 600;
+      font-size: 0.9em;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .form-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .form-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Navigation Arrows Adjustments */
+    .reveal .controls-arrow {
+      color: var(--accent) !important;
+    }
+
+    .reveal .progress span {
+      background: var(--accent) !important;
+    }
+
+    /* Helper styles */
+    .accent-color { color: var(--accent); }
+    .gold-color { color: var(--accent-gold); }
+
+    /* Responsive adjustments for reveal scale */
+    @media (max-width: 768px) {
+      .slide-layout-split {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .project-grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .blog-list {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
 
-<body>
+<body class="dot-bg">
 
-  <main>
+  <!-- CUSTOM FLOATING NAVBAR -->
+  <nav class="custom-navbar">
+    <a onclick="goToSlide(0, 0)" class="nav-logo">Meng<span>.</span>Liang</a>
+    <ul class="nav-menu">
+      <li><button onclick="goToSlide(1, 0)" class="nav-link" id="link-fractional">Fractional Work</button></li>
+      <li><button onclick="goToSlide(2, 0)" class="nav-link" id="link-resume">Resume</button></li>
+      <li><button onclick="goToSlide(3, 0)" class="nav-link" id="link-portfolio">Portfolio</button></li>
+      <li><button onclick="goToSlide(4, 0)" class="nav-link" id="link-blog">Blog</button></li>
+      <li><button onclick="goToSlide(5, 0)" class="nav-link" id="link-contact">Contact</button></li>
+      <li><a href="https://github.com/mengliang10" class="nav-link" target="_blank" rel="noopener">GitHub</a></li>
+    </ul>
+  </nav>
 
-    <!--
-      - #SIDEBAR
-    -->
+  <!-- REVEAL.JS PRESENTATION WRAPPER -->
+  <div class="reveal">
+    <div class="slides">
 
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.jpeg" alt="Meng Liang" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Meng Liang">Meng Liang</h1>
-          <p class="title">APAC Digital Growth &amp; MarTech Leader</p>
+      <!-- ==========================================
+           SLIDE 1: Hero / Executive Summary
+           ========================================== -->
+      <section>
+        <div class="slide-layout-split">
+          <!-- Profile Card -->
+          <div class="col-left">
+            <div class="profile-card">
+              <img src="./assets/images/my-avatar.jpeg" alt="Meng Liang" class="profile-avatar">
+              <h3>Meng Liang</h3>
+              <p class="profile-title">Digital Growth &amp; MarTech Leader</p>
+              
+              <div class="contact-item">
+                <span class="contact-icon">📍</span>
+                <div class="contact-info">
+                  <p>Location</p>
+                  <span>Singapore (Available Immediately)</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-icon">🔗</span>
+                <div class="contact-info">
+                  <p>LinkedIn</p>
+                  <a href="https://www.linkedin.com/in/mengliang/" target="_blank">linkedin.com/in/mengliang</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Summary Details -->
+          <div class="col-right">
+            <h1>APAC Digital Growth &amp;<br><span class="accent-color">MarTech Leader</span></h1>
+            <p style="margin-top: 15px; font-size: 0.85em; text-align: left;">
+              Board-facing VP of Digital Marketing with 20+ years driving digital transformation, customer acquisition, and revenue growth for blue-chip hospitality and travel brands (Frasers, Expedia, Accor, TripAdvisor). Deploys advanced AI-integrated commercial architectures and SEO/GEO/AIO pipelines.
+            </p>
+            
+            <div class="stats-grid">
+              <div class="stat-card">
+                <span class="stat-val">20+</span><br>
+                <span class="stat-lbl">Years Experience</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-val">$27.8M</span><br>
+                <span class="stat-lbl">Projected Savings</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-val">56%</span><br>
+                <span class="stat-lbl">YoY Website Growth</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-val">$5M</span><br>
+                <span class="stat-lbl">Board Capital Secured</span>
+              </div>
+            </div>
+            
+            <div class="tag-container">
+              <span class="tag-pill">SEO, GEO &amp; AIO</span>
+              <span class="tag-pill">Applied AI &amp; ML</span>
+              <span class="tag-pill">MarTech</span>
+              <span class="tag-pill sec">CRM &amp; Loyalty</span>
+              <span class="tag-pill sec">P&amp;L Ownership</span>
+              <span class="tag-pill sec">APAC Expansion</span>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-              <address>Singapore</address>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </div>
-            <div class="contact-info">
-              <p class="contact-title">LinkedIn</p>
-              <a href="https://www.linkedin.com/in/mengliang/" class="contact-link" target="_blank">mengliang</a>
-            </div>
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://github.com/mengliang10" class="social-link" target="_blank">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.linkedin.com/in/mengliang/" class="social-link" target="_blank">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>Fractional Work</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-          <li class="navbar-item">
-            <a href="https://github.com/mengliang10" class="navbar-link" target="_blank" rel="noopener">GitHub</a>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-      <!--
-        - #FRACTIONAL WORK
-      -->
-
-      <article class="about active" data-page="fractional work">
-
-        <header>
-          <h2 class="h2 article-title">Fractional Work</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            I help financial services and travel brands dominate AI-powered search surfaces through a proprietary "Triple Threat" methodology — SEO (technical substrate) + Generative Engine Optimization (AI citation/LLM retrieval) + AI Optimization (zero-click answer engines). Current and recent engagements include a Korean insurance company and a Korean savings bank, where I've projected 2–3× AI citation share increases.
+      <!-- ==========================================
+           SLIDE 2: Fractional Work
+           ========================================== -->
+      <section>
+        <!-- Slide 2.1: The Triple Threat -->
+        <section>
+          <h2>Fractional SEO, GEO &amp; AIO</h2>
+          <p style="text-align: left; font-size: 0.85em; margin-bottom: 25px;">
+            I help financial services and travel brands dominate AI-powered search surfaces through a proprietary <strong class="accent-color">"Triple Threat" methodology</strong> — SEO (technical substrate) + Generative Engine Optimization (AI citation/LLM retrieval) + AI Optimization (zero-click answer engines).
           </p>
-          <p>
-            Twenty years leading performance and digital marketing across Fortune 500 hospitality and travel brands — Frasers, Expedia, Accor, TripAdvisor — I've built the systems, teams, and commercial discipline that most organisations spend years trying to hire for. Now applying that rigor to the next frontier: making brands visible, quotable, and trusted in the AI-powered search ecosystem.
-          </p>
-          <p>
-            Available for diagnostic audits (S$1K–S$2K workshops), 90-day execution sprints, and fractional retainers (S$4K–S$10K/mo) across APAC. I plug in fast, operate at board level when needed, and get hands-on at the execution layer when it counts.
-          </p>
+          
+          <div class="slide-layout-grid">
+            <div class="service-card">
+              <h3>Fractional CMO &amp; Performance</h3>
+              <p>Senior marketing leadership on a project basis — P&amp;L ownership ($15M+), media in-housing, predictive ML bidding models, and dynamic segmentations.</p>
+            </div>
+            <div class="service-card">
+              <h3>Triple Threat Search Visibility</h3>
+              <p>Traditional SEO for rankings, GEO for AI search (ChatGPT, Perplexity, Gemini), and AIO for AI Overviews (JSON-LD schema, entity graph RAG).</p>
+            </div>
+            <div class="service-card">
+              <h3>Hospitality &amp; Travel Growth</h3>
+              <p>Two decades of domain expertise (Frasers, Accor, Expedia). Direct booking growth, loyalty economics, and automated guest journeys.</p>
+            </div>
+            <div class="service-card">
+              <h3>CRM &amp; Loyalty Personalisation</h3>
+              <p>Customer data platform (CDP) orchestration, cohort segmentations, real-time offer engines, and automated marketing flows.</p>
+            </div>
+          </div>
+          <p class="gold-color" style="font-size: 0.75em; margin-top: 20px;">⬇️ Swipe down to view Fractional Case Studies</p>
         </section>
 
-
-        <!--
-          - services
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What I offer</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg" alt="strategy icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Fractional CMO &amp; Performance Marketing Leadership</h4>
-                <p class="service-item-text">
-                  Senior marketing leadership on a part-time or project basis — strategy, roadmaps,
-                  board reporting, P&amp;L ownership, and team direction without the full-time overhead.
-                  Hands-on performance marketing across paid search, programmatic, paid social, and
-                  in-house media transitions. AI-augmented campaign optimisation using predictive ML
-                  bidding models and generative AI for creative and audience intelligence at scale.
-                </p>
-              </div>
-            </li>
-
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="search visibility icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">SEO, GEO &amp; AIO — Triple Threat Methodology</h4>
-                <p class="service-item-text">
-                  <strong>Proven results:</strong> A Korean insurance company projected 14%→32% AI citation share (280K–420K monthly AI exposures). A Korean savings bank projected 8%→26%.
-                  Future-proof your search visibility across every surface where buyers discover brands.
-                  Traditional SEO for Google rankings, Generative Engine Optimization for AI-powered search
-                  (ChatGPT, Perplexity, Gemini), and AI Overview Optimization to win featured placements.
-                  Capabilities: JSON-LD schema architecture, AI crawler bot policies, entity graph analysis,
-                  multi-LLM citation benchmarking, RAG pipeline optimization.
-                </p>
-              </div>
-            </li>
-
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="hospitality icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Hospitality &amp; Travel Digital Marketing</h4>
-                <p class="service-item-text">
-                  Two decades of domain expertise across Frasers, Expedia, Accor, TripAdvisor, and Raffles.
-                  Direct booking growth, OTA channel strategy, loyalty programme economics,
-                  and revenue management alignment — from luxury to extended-stay, across APAC and global markets.
-                  Now enhanced with AI-powered personalisation engines, propensity-based bidding, and
-                  intelligent guest journey automation.
-                </p>
-              </div>
-            </li>
-
-            <li class="service-item">
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="crm icon" width="40">
-              </div>
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">CRM, Loyalty &amp; AI-Driven Personalisation</h4>
-                <p class="service-item-text">
-                  Segmentation logic, journey automation, and real-time offer engine architecture.
-                  From initial brief through to live deployment — now supercharged with AI-powered
-                  customer scoring, predictive churn models, and dynamic content personalisation
-                  that turns first-party data into measurable revenue.
-                </p>
-              </div>
-            </li>
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials modal (required by JS)
-        -->
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="./assets/images/my-avatar.jpeg" alt="Meng Liang" width="80" data-modal-img>
-              </figure>
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-              <h4 class="h3 modal-title" data-modal-title></h4>
-              <time datetime=""></time>
-              <div data-modal-text><p></p></div>
-            </div>
-
-          </section>
-
-        </div>
-
-      </article>
-
-
-      <!--
-        - #RESUME
-      -->
-
-      <article class="resume" data-page="resume">
-
-        <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <h2 class="h2 article-title">Resume</h2>
-          <a href="./assets/Tan-Meng-Liang-Resume-2026.pdf" download style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(to bottom right, hsl(175, 70%, 45%), hsl(190, 80%, 55%)); color: #1b1b1b; padding: 10px 20px; border-radius: 14px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.25s ease;">
-            <ion-icon name="download-outline" style="font-size: 18px;"></ion-icon>
-            <span>Download CV (PDF)</span>
-          </a>
-        </header>
-
-        <!-- Resume inline styles -->
-        <style>
-          .r-section { margin-bottom: 2.5rem; }
-          .r-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange-yellow-crayola); margin-bottom: 0.4rem; }
-          .r-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--white-1); }
-          .r-desc { color: var(--light-gray-70); font-size: 0.9rem; margin-bottom: 1.5rem; }
-
-          .r-stats { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
-          .r-stat { padding: 0.75rem 1.25rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 12px; }
-          .r-stat-val { font-size: 1.3rem; font-weight: 700; color: var(--orange-yellow-crayola); }
-          .r-stat-lbl { font-size: 0.7rem; color: var(--light-gray-70); text-transform: uppercase; letter-spacing: 0.04em; }
-
-          .r-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-          .r-tag { padding: 0.25rem 0.7rem; border-radius: 50px; font-size: 0.75rem; font-weight: 500; border: 1px solid var(--jet); color: var(--light-gray-70); background: var(--eerie-black-2); }
-          .r-tag.hl { background: hsla(175, 70%, 50%, 0.1); border-color: hsla(175, 70%, 50%, 0.3); color: var(--orange-yellow-crayola); }
-
-          .r-quote { background: var(--bg-gradient-onyx); border: 1px solid var(--jet); border-radius: 14px; padding: 1.5rem; margin-bottom: 2rem; position: relative; }
-          .r-quote::before { content: '\201C'; font-size: 3rem; color: var(--orange-yellow-crayola); position: absolute; top: 0.3rem; left: 1rem; font-family: Georgia, serif; opacity: 0.4; }
-          .r-quote-text { font-style: italic; color: var(--light-gray-70); line-height: 1.7; padding-left: 1.5rem; font-size: 0.9rem; margin-bottom: 0.75rem; }
-          .r-quote-name { font-weight: 600; font-size: 0.85rem; color: var(--white-1); padding-left: 1.5rem; }
-          .r-quote-role { font-size: 0.75rem; color: var(--light-gray-70); padding-left: 1.5rem; }
-
-          .r-comp-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-top: 0.75rem; }
-          .r-comp-card { padding: 1rem; background: linear-gradient(135deg, hsla(175, 70%, 50%, 0.04), hsla(190, 80%, 55%, 0.02)); border: 1px solid var(--jet); border-radius: 10px; }
-          .r-comp-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--white-1); }
-          .r-comp-card p { font-size: 0.78rem; color: var(--light-gray-70); line-height: 1.5; }
-
-          .r-exp { padding: 1.5rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 14px; margin-bottom: 1rem; transition: all 0.25s; }
-          .r-exp:hover { border-color: var(--border-gradient-onyx); box-shadow: 0 4px 15px rgba(0,0,0,0.3); transform: translateY(-1px); }
-          .r-exp-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
-          .r-exp-company { font-size: 1.05rem; font-weight: 700; color: var(--white-1); }
-          .r-exp-role { font-size: 0.9rem; color: var(--orange-yellow-crayola); font-weight: 600; margin-bottom: 0.2rem; }
-          .r-exp-date { font-size: 0.75rem; color: var(--light-gray-70); font-weight: 500; padding: 0.2rem 0.6rem; background: var(--onyx); border-radius: 50px; border: 1px solid var(--jet); white-space: nowrap; }
-          .r-exp-summary { color: var(--light-gray-70); font-size: 0.85rem; margin-bottom: 0.75rem; line-height: 1.6; }
-          .r-exp-list { list-style: none; margin-bottom: 0.75rem; }
-          .r-exp-list li { position: relative; padding-left: 1rem; margin-bottom: 0.4rem; color: var(--light-gray-70); font-size: 0.8rem; line-height: 1.55; }
-          .r-exp-list li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 5px; height: 5px; border-radius: 50%; background: var(--orange-yellow-crayola); }
-          .r-exp-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.75rem; }
-          .r-exp-tag { font-size: 0.65rem; padding: 0.15rem 0.5rem; background: hsla(175, 70%, 50%, 0.1); color: var(--orange-yellow-crayola); border-radius: 50px; font-weight: 500; }
-
-          .r-proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem; }
-          .r-proj { padding: 1.25rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 14px; transition: all 0.25s; }
-          .r-proj:hover { border-color: hsla(175, 70%, 50%, 0.3); transform: translateY(-1px); }
-          .r-proj h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
-          .r-proj h3 a { color: var(--white-1); text-decoration: none; }
-          .r-proj h3 a:hover { color: var(--orange-yellow-crayola); }
-          .r-proj p { font-size: 0.8rem; color: var(--light-gray-70); line-height: 1.5; margin-bottom: 0.75rem; }
-          .r-proj-badge { font-size: 0.6rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.04em; }
-          .r-proj-badge.live { background: hsla(142, 72%, 45%, 0.12); color: hsl(142, 72%, 55%); }
-          .r-proj-badge.oss { background: hsla(175, 70%, 50%, 0.12); color: var(--orange-yellow-crayola); }
-          .r-proj-badge.consult { background: hsla(43, 76%, 50%, 0.12); color: hsl(43, 76%, 60%); }
-
-          .r-skills-group { margin-bottom: 1.5rem; }
-          .r-skills-group h3 { font-size: 0.9rem; font-weight: 600; color: var(--white-1); margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--jet); }
-          .r-skill-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-          .r-skill-pill { font-size: 0.75rem; padding: 0.3rem 0.7rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 50px; color: var(--light-gray-70); }
-          .r-skill-pill.hl { background: hsla(175, 70%, 50%, 0.1); border-color: hsla(175, 70%, 50%, 0.3); color: var(--orange-yellow-crayola); }
-
-          .r-lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; }
-          .r-lang { padding: 1rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 10px; text-align: center; }
-          .r-lang h4 { font-size: 0.9rem; margin-bottom: 0.2rem; color: var(--white-1); }
-          .r-lang p { font-size: 0.75rem; color: var(--light-gray-70); }
-          .r-lang-dots { display: flex; gap: 3px; justify-content: center; margin-top: 0.4rem; }
-          .r-lang-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--jet); }
-          .r-lang-dot.on { background: var(--orange-yellow-crayola); }
-
-          .r-cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; }
-          .r-cert { padding: 1rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 10px; }
-          .r-cert-yr { font-size: 0.65rem; color: var(--orange-yellow-crayola); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
-          .r-cert-name { font-size: 0.8rem; font-weight: 600; margin: 0.2rem 0; color: var(--white-1); }
-          .r-cert-iss { font-size: 0.75rem; color: var(--light-gray-70); }
-
-          .r-edu { padding: 1.25rem; background: var(--eerie-black-2); border: 1px solid var(--jet); border-radius: 10px; margin-bottom: 0.75rem; }
-          .r-edu h3 { font-size: 0.95rem; font-weight: 600; color: var(--white-1); margin-bottom: 0.2rem; }
-          .r-edu-school { color: var(--orange-yellow-crayola); font-weight: 500; font-size: 0.85rem; }
-          .r-edu-year { font-size: 0.75rem; color: var(--light-gray-70); margin-bottom: 0.3rem; }
-          .r-edu p { font-size: 0.8rem; color: var(--light-gray-70); }
-
-          .r-toggle { background: none; border: 1px solid var(--jet); color: var(--orange-yellow-crayola); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.75rem; cursor: pointer; font-weight: 500; transition: all 0.2s; margin-top: 0.5rem; }
-          .r-toggle:hover { background: hsla(175, 70%, 50%, 0.1); }
-          .r-collapse { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-          .r-collapse.open { max-height: 5000px; }
-
-          @media (max-width: 768px) {
-            .r-exp-head { flex-direction: column; }
-            .r-comp-cards { grid-template-columns: 1fr; }
-            .r-stats { flex-direction: column; }
-            .r-stat { display: flex; gap: 0.75rem; align-items: center; }
-          }
-        </style>
-
-        <!-- EXECUTIVE SUMMARY -->
-        <section class="r-section">
-          <p class="r-desc" style="font-size: 0.95rem; line-height: 1.7;">
-            Board-facing VP of Digital Marketing with 20+ years driving digital transformation, customer acquisition, and revenue growth for blue-chip hospitality &amp; travel enterprises (Frasers, Expedia, Accor, TripAdvisor). From early digital pioneer to enterprise AI practitioner backed by NUS Knowledge Engineering and recent Generative AI upskilling to lead AI-integrated commercial architectures.
-          </p>
-
-          <div class="r-stats">
-            <div class="r-stat"><span class="r-stat-val">20+</span><span class="r-stat-lbl">Years Experience</span></div>
-            <div class="r-stat"><span class="r-stat-val">$27.8M</span><span class="r-stat-lbl">Projected Savings</span></div>
-            <div class="r-stat"><span class="r-stat-val">56%</span><span class="r-stat-lbl">YoY Room Night Growth</span></div>
-            <div class="r-stat"><span class="r-stat-val">$5M</span><span class="r-stat-lbl">Board Capital Secured</span></div>
-          </div>
-
-          <div class="r-tags">
-            <span class="r-tag hl">Digital Transformation</span>
-            <span class="r-tag hl">Applied AI &amp; ML</span>
-            <span class="r-tag">Performance Marketing</span>
-            <span class="r-tag">CRM &amp; Loyalty</span>
-            <span class="r-tag">MarTech</span>
-            <span class="r-tag">Executive Leadership</span>
-            <span class="r-tag">Hospitality &amp; Travel</span>
-            <span class="r-tag">APAC Markets</span>
-          </div>
-        </section>
-
-        <!-- RECOMMENDATION -->
-        <div class="r-quote">
-          <p class="r-quote-text">"Meng Liang demonstrated an ability to identify growth opportunities and suggest potential improvements... His efforts contributed to steady growth in key areas, including 56% growth in Website Room Nights (2023) and currently pacing at 42% growth in Website Room Nights (2024)."</p>
-          <div class="r-quote-name">Mark Chan</div>
-          <div class="r-quote-role">Chief Operating Officer, Frasers Hospitality Pte Ltd</div>
-        </div>
-
-        <!-- CORE COMPETENCIES -->
-        <section class="r-section">
-          <div class="r-label">Core Competencies</div>
-          <h3 class="r-title" style="font-size: 1.2rem;">What I Bring to the Table</h3>
-          <div class="r-comp-cards">
-            <div class="r-comp-card">
-              <h4>Applied AI &amp; Data Science</h4>
-              <p>22% CPA reduction via predictive ML bidding. Dynamic segmentation across behavioral, geographic, and channel dimensions. 40+ automated journeys with 35% engagement lift.</p>
-            </div>
-            <div class="r-comp-card">
-              <h4>Executive Leadership &amp; Governance</h4>
-              <p>$15M media P&amp;L ownership. $1.4M agency savings (18% to 13% fees). APAC Digital Centre of Excellence (20 staff). Cross-functional agile scaling.</p>
-            </div>
-            <div class="r-comp-card">
-              <h4>Digital Transformation</h4>
-              <p>$5M board capital secured. 2.3M+ customer profiles unified. 5X campaign velocity (agency to in-house). Full MarTech stack unification.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- EXPERIENCE -->
-        <section class="r-section">
-          <div class="r-label">Career History</div>
-          <h3 class="r-title">Experience</h3>
-          <p class="r-desc">20+ years across hospitality, travel, and digital marketing — from early e-commerce pioneer to enterprise AI leadership.</p>
-
-          <!-- Mezzofy -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">Mezzofy (Hong Kong) Limited</div>
-                <div class="r-exp-role">Director of Development, Hospitality (Contract)</div>
-              </div>
-              <span class="r-exp-date">Mar 2026 – Present</span>
-            </div>
-            <p class="r-exp-summary">Market development expert advising CEO on digital strategy for enterprise coupon platform expansion into hospitality sector.</p>
-            <ul class="r-exp-list">
-              <li>Formulated foundational GTM strategy for hospitality client acquisition, aligning platform APIs with legacy PMS/POS systems</li>
-              <li>Advised management on website architecture, SEO strategy, social media integration, and market reach optimization</li>
-              <li>Developed bespoke B2B sales narratives and negotiation frameworks tailored to hotel operators' ancillary revenue goals</li>
-            </ul>
-            <div class="r-exp-tags"><span class="r-exp-tag">GTM Strategy</span><span class="r-exp-tag">Hospitality Tech</span><span class="r-exp-tag">B2B Sales</span><span class="r-exp-tag">SEO</span></div>
-          </div>
-
-          <!-- Independent Advisory & AI Commercialization -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">Independent Advisory & AI Commercialization</div>
-                <div class="r-exp-role">Fractional GEO/AIO/SEO Consulting | AI &amp; Applied ML Upskilling</div>
-              </div>
-              <span class="r-exp-date">Nov 2024 – Present</span>
-            </div>
-            <p class="r-exp-summary">Dual-track engagement: board-level GEO/AIO/SEO consulting for Korean financial services clients using a proprietary "Triple Threat" methodology, alongside a deliberate 16-month AI/ML upskilling sprint for next-generation marketing leadership.</p>
-
-            <div class="r-comp-cards" style="margin-bottom: 1rem;">
-              <div class="r-comp-card">
-                <h4>Korean Insurance Company</h4>
-                <p>Diagnosed systemic crawlability failures (JS-rendered content, 5+ fragmented domains). Projected AI citation share lift from 14% to 32%, generating 280K–420K monthly AI-driven brand exposures.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">14% &rarr; 32% AI Citation Share</span>
-              </div>
-              <div class="r-comp-card">
-                <h4>Korean Savings Bank</h4>
-                <p>Identified "digital invisible gap" — zero AI-crawler accessibility, thin entity graph. 90-day sprint to triple AI citation share from 8% to 26%.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">8% &rarr; 26% AI Citation Share</span>
+        <!-- Slide 2.2: Insurance Case Study -->
+        <section>
+          <h2>Case Study: Korean Insurance Company</h2>
+          <div class="slide-layout-split">
+            <div class="col-left">
+              <div class="stat-card" style="border-color: var(--accent-glow); padding: 30px;">
+                <span class="stat-val" style="font-size: 2.8em;">14% → 32%</span><br>
+                <span class="stat-lbl" style="font-size: 0.8em; color: var(--accent);">Projected AI Citation Share</span>
+                <p style="font-size: 0.75em; margin-top: 15px; color: var(--text-secondary);">Generates 280K–420K additional monthly brand exposures in AI engines.</p>
               </div>
             </div>
-
-            <ul class="r-exp-list">
-              <li>Deployed "Triple Threat" methodology: SEO + GEO (AI citation/LLM retrieval) + AIO (zero-click/answer-engine optimization) across ChatGPT, Perplexity, Gemini, and Google AI Overviews</li>
-              <li>Delivered diagnostic audits (S$1K–S$2K workshops), 90-day execution sprints, and fractional retainers (S$4K–S$10K/mo)</li>
-              <li>Technical capabilities: JSON-LD schema architecture, AI crawler bot policies, entity graph analysis, multi-LLM citation benchmarking, RAG pipeline optimization</li>
-              <li>Completed 20+ advanced certifications (NVIDIA, BCG, UC Davis, Meta) across ML, data science, and digital transformation</li>
-              <li>Built production-ready ML pipeline: LightGBM purchase prediction model achieving 67.6% F1 score, 82.4% recall (12,330 sessions processed)</li>
-            </ul>
-
-            <div class="r-comp-cards">
-              <div class="r-comp-card">
-                <h4>AI Purchase Prediction Model</h4>
-                <p>End-to-end ML pipeline predicting customer purchase behavior (12,330 sessions &rarr; 8,380 clean records) with LightGBM.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">67.6% F1 &middot; 82.4% Recall</span>
-              </div>
-              <div class="r-comp-card">
-                <h4>Service Apartment Homepage</h4>
-                <p>Web frontend HTML5 and CSS application showcasing premium hospitality branding with responsive design and GitHub Pages.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">Live Demo</span>
-              </div>
-            </div>
-
-            <div class="r-exp-tags"><span class="r-exp-tag">SEO, GEO &amp; AIO</span><span class="r-exp-tag">Financial Services</span><span class="r-exp-tag">LLM Optimization</span><span class="r-exp-tag">Board Advisory</span><span class="r-exp-tag">Machine Learning</span><span class="r-exp-tag">Python</span><span class="r-exp-tag">LightGBM</span></div>
-          </div>
-
-          <!-- Frasers Hospitality -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">Frasers Hospitality</div>
-                <div class="r-exp-role">VP Global Digital Marketing and Distribution</div>
-              </div>
-              <span class="r-exp-date">Oct 2018 – Oct 2024</span>
-            </div>
-            <p class="r-exp-summary">Led global digital marketing, distribution strategy, and MarTech replatforming across 70+ properties, reporting directly to the COO. Transitioned media buying in-house and established the APAC Digital Centre of Excellence.</p>
-            <ul class="r-exp-list">
-              <li>Engineered loyalty transformation shifting bookings from 28% to 74% (projected to save $27.8M in OTA commissions)</li>
-              <li>Drove 56% YoY website room night growth, externally validated by COO</li>
-              <li>Secured $5M board capital for CDP, booking engine, CRM, and analytics replatforming</li>
-              <li>Unified 2.3M+ contact and transaction records across 12+ legacy systems (SAP, Adobe, Sabre)</li>
-              <li>Built real-time offer engine driving 30% ADR premium for loyalty members (18-month payback)</li>
-              <li>In-housed $2M annual media budget; cut CPA by 22% via predictive ML bidding</li>
-              <li>Led 40+ A/B testing cycles/year via Adobe Target; +11% mobile checkout, +9% price perception</li>
-              <li>Launched Fliggy (Alibaba) China strategy, capturing $1.2M Year 1 revenue during COVID</li>
-            </ul>
-            <div class="r-comp-cards">
-              <div class="r-comp-card">
-                <h4>$5M Digital Transformation &amp; CDP</h4>
-                <p>SAP Emarsys CDP + real-time segmentation + CRM personalization across 375K Fraser World loyalty members.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">18-month payback</span>
-              </div>
-              <div class="r-comp-card">
-                <h4>In-House ML Bidding</h4>
-                <p>Direct platform API connections to Google, Meta, DV360 replacing traditional agencies.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">-22% CPA &middot; 5X velocity</span>
-              </div>
-              <div class="r-comp-card">
-                <h4>Global UX Revamp</h4>
-                <p>Adobe Experience Manager replatforming with 40+ A/B tests, localized payment flows across region.</p>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--orange-yellow-crayola);">+11% checkout &middot; +9% perception</span>
-              </div>
-            </div>
-            <div class="r-exp-tags"><span class="r-exp-tag">SAP CDP</span><span class="r-exp-tag">Adobe AEM</span><span class="r-exp-tag">ML Bidding</span><span class="r-exp-tag">CRM</span><span class="r-exp-tag">Loyalty</span><span class="r-exp-tag">P&amp;L</span><span class="r-exp-tag">Team Leadership</span></div>
-          </div>
-
-          <!-- HomeAway -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">HomeAway (Expedia Group)</div>
-                <div class="r-exp-role">Head of Performance Marketing, APAC</div>
-              </div>
-              <span class="r-exp-date">Mar 2016 – Sep 2018</span>
-            </div>
-            <p class="r-exp-summary">Held full P&amp;L responsibility for $15M annual media spend across 7 APAC markets. Led an 8-person team executing SEM, programmatic, paid social, and app lifecycle marketing.</p>
-            <ul class="r-exp-list">
-              <li>Orchestrated zero-to-one Japan market entry achieving $3M Year 1 revenue from $1M budget (300% ROI)</li>
-              <li>Lifted overall regional portfolio ROI by 40%</li>
-              <li>Pioneered programmatic value-based bidding with Expedia data science, driving 18% CAC reduction across $15M portfolio</li>
-              <li>Designed automated persona-based retargeting, increasing dormant customer reactivation by 25% and reducing CPI by 30%</li>
-            </ul>
-            <div class="r-exp-tags"><span class="r-exp-tag">$15M P&amp;L</span><span class="r-exp-tag">SEM</span><span class="r-exp-tag">Programmatic</span><span class="r-exp-tag">Japan GTM</span><span class="r-exp-tag">CRM</span><span class="r-exp-tag">App Growth</span></div>
-          </div>
-
-          <!-- AccorHotels -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">AccorHotels</div>
-                <div class="r-exp-role">APAC Head of Paid Search &amp; Analytics</div>
-              </div>
-              <span class="r-exp-date">Jan 2013 – Mar 2016</span>
-            </div>
-            <p class="r-exp-summary">Directed $10M SEM portfolio across 13 diverse APAC markets (Sofitel to Ibis). Enforced regional digital governance, analytics standardizations, and deployed market-maturity bidding models.</p>
-            <ul class="r-exp-list">
-              <li>Drove +14% average YoY room-night growth, peaking at +48% in Korea</li>
-              <li>Renegotiated agency fees from 18% to 13%, saving $1.4M annually and improving ROAS by 22%</li>
-              <li>Designed differentiated bidding framework mapped to local market maturity</li>
-              <li>Built regional performance dashboards for revenue managers and marketing GMs</li>
-            </ul>
-            <div class="r-exp-tags"><span class="r-exp-tag">$10M SEM</span><span class="r-exp-tag">Analytics</span><span class="r-exp-tag">13 Markets</span><span class="r-exp-tag">ROAS</span><span class="r-exp-tag">Governance</span></div>
-          </div>
-
-          <!-- TripAdvisor -->
-          <div class="r-exp">
-            <div class="r-exp-head">
-              <div>
-                <div class="r-exp-company">TripAdvisor</div>
-                <div class="r-exp-role">Senior Search Marketing Analyst</div>
-              </div>
-              <span class="r-exp-date">Nov 2010 – Dec 2012</span>
-            </div>
-            <p class="r-exp-summary">First APAC digital hire. Designed and scaled foundational digital marketing infrastructure across emerging Asian markets (Japan, Korea, Taiwan, Singapore).</p>
-            <ul class="r-exp-list">
-              <li>Automated and managed 10M+ search keyword portfolio with double-digit CTR improvements</li>
-              <li>Developed algorithmic bidding models using regression analysis tied to time-of-day, device, and seasonality</li>
-              <li>Built the foundation for propensity-based bidding methods later deployed at Frasers</li>
-            </ul>
-            <div class="r-exp-tags"><span class="r-exp-tag">SEM at Scale</span><span class="r-exp-tag">10M+ Keywords</span><span class="r-exp-tag">Algorithmic Bidding</span><span class="r-exp-tag">APAC Pioneer</span></div>
-          </div>
-
-          <!-- Earlier roles -->
-          <button class="r-toggle" onclick="var el=document.getElementById('rEarlier');el.classList.toggle('open');this.textContent=el.classList.contains('open')?'Hide Earlier Roles':'Show Earlier Roles (2003\u20132010)';">Show Earlier Roles (2003–2010)</button>
-          <div class="r-collapse" id="rEarlier">
-
-            <div class="r-exp" style="margin-top: 1rem;">
-              <div class="r-exp-head">
-                <div><div class="r-exp-company">GroupM</div><div class="r-exp-role">SEM Lead, APACJ</div></div>
-                <span class="r-exp-date">Apr 2010 – Nov 2010</span>
-              </div>
-              <p class="r-exp-summary">Directed US$10M SEM budget across 8 APAC markets for Dell's consumer and enterprise divisions.</p>
-              <ul class="r-exp-list"><li>Delivered 20% ROI improvement through intent-based campaign structuring and geo-bidding tiers</li></ul>
-            </div>
-
-            <div class="r-exp">
-              <div class="r-exp-head">
-                <div><div class="r-exp-company">Singapore Press Holdings</div><div class="r-exp-role">Digital Marketing Executive</div></div>
-                <span class="r-exp-date">Mar 2008 – Apr 2010</span>
-              </div>
-              <p class="r-exp-summary">Managed integrated SEM, display, and sponsorship campaigns, onboarding 100+ SME advertisers onto the company's self-serve platform.</p>
-              <ul class="r-exp-list">
-                <li>Achieved 88% YoY growth in digital advertising revenue (2009)</li>
-                <li>Built one of Singapore's earliest structured multi-channel digital marketing operations</li>
+            <div class="col-right" style="text-align: left;">
+              <h3>Diagnostic Audit and Remediation</h3>
+              <ul style="margin-top: 15px; padding-left: 20px;">
+                <li style="margin-bottom: 10px;"><strong>The Challenge:</strong> Complete digital invisibility on AI crawlers. Fragmented brand domains, heavy reliance on client-side JS (unindexable), and stale entity references.</li>
+                <li style="margin-bottom: 10px;"><strong>The Solution:</strong> Structured data schema injection (JSON-LD), deployment of crawl-friendly indexing templates, and Wikipedia/Wikidata entity repair.</li>
+                <li style="margin-bottom: 10px;"><strong>Delivery Speed:</strong> Accelerated GTM recommendations within a 2-week workshop model.</li>
               </ul>
             </div>
-
-            <div class="r-exp">
-              <div class="r-exp-head">
-                <div><div class="r-exp-company">Prince Flower Shop</div><div class="r-exp-role">E-Commerce &amp; Marketing Lead</div></div>
-                <span class="r-exp-date">Apr 2004 – Mar 2008</span>
-              </div>
-              <p class="r-exp-summary">Built one of Singapore's earliest direct-to-consumer e-commerce operations across SEO, SEM, and checkout optimization.</p>
-              <ul class="r-exp-list"><li>Designed end-to-end DTC e-commerce funnels including a custom Excel-based CRM that prefigured enterprise lifecycle programs</li></ul>
-            </div>
-
-            <div class="r-exp">
-              <div class="r-exp-head">
-                <div><div class="r-exp-company">Raffles International Hotels</div><div class="r-exp-role">CRM Marketing Executive</div></div>
-                <span class="r-exp-date">Jan 2003 – Apr 2004</span>
-              </div>
-              <p class="r-exp-summary">Managed global CRM marketing initiatives across 12 luxury properties.</p>
-              <ul class="r-exp-list"><li>Ran among Singapore's first email A/B tests in luxury hospitality (2003), achieving 25% engagement lift through lifecycle segmentation</li></ul>
-            </div>
-
           </div>
         </section>
 
-        <!-- PROJECTS -->
-        <section class="r-section">
-          <div class="r-label">Portfolio</div>
-          <h3 class="r-title">Projects</h3>
-          <p class="r-desc">Selected technical projects demonstrating hands-on AI/ML and web development capability.</p>
-          <div class="r-proj-grid">
-            <div class="r-proj">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <h3><a href="https://github.com/mengliang10/aiap23-tan-meng-liang-639H" target="_blank">AI Purchase Prediction</a></h3>
-                <span class="r-proj-badge oss">Open Source</span>
+        <!-- Slide 2.3: Savings Bank Case Study -->
+        <section>
+          <h2>Case Study: Korean Savings Bank</h2>
+          <div class="slide-layout-split">
+            <div class="col-left">
+              <div class="stat-card" style="border-color: var(--accent-glow); padding: 30px;">
+                <span class="stat-val" style="font-size: 2.8em;">8% → 26%</span><br>
+                <span class="stat-lbl" style="font-size: 0.8em; color: var(--accent);">Projected AI Citation Share</span>
+                <p style="font-size: 0.75em; margin-top: 15px; color: var(--text-secondary);">Calculated across category-specific retail financial product queries.</p>
               </div>
-              <p>End-to-end ML pipeline predicting customer purchase behavior with LightGBM. 12,330 sessions processed, achieving 67.6% F1 score and 82.4% recall.</p>
-              <div class="r-exp-tags"><span class="r-exp-tag">Python</span><span class="r-exp-tag">LightGBM</span><span class="r-exp-tag">Scikit-learn</span><span class="r-exp-tag">Pandas</span></div>
             </div>
-            <div class="r-proj">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <h3><a href="https://mengliang10.github.io/frasers-hospitality/" target="_blank">Service Apartment Web</a></h3>
-                <span class="r-proj-badge live">Live Demo</span>
-              </div>
-              <p>Web frontend HTML5 and CSS application showcasing premium hospitality branding with responsive design.</p>
-              <div class="r-exp-tags"><span class="r-exp-tag">HTML5</span><span class="r-exp-tag">CSS3</span><span class="r-exp-tag">JavaScript</span><span class="r-exp-tag">GitHub Pages</span></div>
-            </div>
-            <div class="r-proj">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <h3><a href="https://mengliang10.github.io/frasers-hospitality-UX2024/" target="_blank">UX Redesign 2024</a></h3>
-                <span class="r-proj-badge live">Live Demo</span>
-              </div>
-              <p>Comprehensive mobile-first UX redesign. 36 design screens across 70+ properties for full customer journey coverage.</p>
-              <div class="r-exp-tags"><span class="r-exp-tag">UX Design</span><span class="r-exp-tag">Mobile-First</span><span class="r-exp-tag">Workshops</span></div>
-            </div>
-            <div class="r-proj">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <h3><a href="#">Travel SME Advisory</a></h3>
-                <span class="r-proj-badge consult">Consulting</span>
-              </div>
-              <p>Fractional strategic consulting on AI-enabled CRM architectures and privacy-compliant (GDPR/PDPA) data strategies.</p>
-              <div class="r-exp-tags"><span class="r-exp-tag">CRM Architecture</span><span class="r-exp-tag">GDPR/PDPA</span><span class="r-exp-tag">AI Strategy</span></div>
+            <div class="col-right" style="text-align: left;">
+              <h3>RAG Pipeline Optimization</h3>
+              <ul style="margin-top: 15px; padding-left: 20px;">
+                <li style="margin-bottom: 10px;"><strong>The Challenge:</strong> Zero accessibility for AI web crawlers. Deep content fragmentation and lack of structured ontology relationships.</li>
+                <li style="margin-bottom: 10px;"><strong>The Strategy:</strong> A 90-day execution sprint to build crawlable knowledge graphs and optimize RAG retrieval paths.</li>
+                <li style="margin-bottom: 10px;"><strong>Key Finding:</strong> Identified systemic gaps in Korean financial sector readiness for AI search engines, securing early-mover advantages.</li>
+              </ul>
             </div>
           </div>
         </section>
+      </section>
 
-        <!-- SKILLS -->
-        <section class="r-section">
-          <div class="r-label">Capabilities</div>
-          <h3 class="r-title">Skills &amp; Expertise</h3>
-
-          <div class="r-skills-group">
-            <h3>Digital Marketing &amp; Media</h3>
-            <div class="r-skill-pills">
-              <span class="r-skill-pill hl">SEM/PPC at Scale</span><span class="r-skill-pill hl">Programmatic &amp; DV360</span><span class="r-skill-pill">Paid Social (Meta, WeChat)</span><span class="r-skill-pill">SEO &amp; Content Strategy</span><span class="r-skill-pill">App Marketing &amp; ASO</span><span class="r-skill-pill">CRO</span><span class="r-skill-pill">A/B &amp; Multivariate Testing</span><span class="r-skill-pill">Attribution Modeling</span>
+      <!-- ==========================================
+           SLIDE 3: Resume
+           ========================================== -->
+      <section>
+        <!-- Slide 3.1: Frasers -->
+        <section>
+          <h2>Experience: VP Global Digital @ Frasers Hospitality</h2>
+          <p class="gold-color" style="text-align: left; font-size: 0.8em; margin-bottom: 20px; font-weight: 600;">Singapore | Oct 2018 – Oct 2024</p>
+          <div class="experience-card">
+            <div class="experience-card-header">
+              <h3>VP Global Digital Marketing and Distribution</h3>
+              <span class="date">$5M CapEx Managed</span>
             </div>
-          </div>
-          <div class="r-skills-group">
-            <h3>AI, Data Science &amp; Analytics</h3>
-            <div class="r-skill-pills">
-              <span class="r-skill-pill hl">Predictive ML Bidding</span><span class="r-skill-pill hl">LightGBM / Scikit-learn</span><span class="r-skill-pill">Python</span><span class="r-skill-pill">SQL (PostgreSQL, MySQL, Oracle)</span><span class="r-skill-pill">Customer Propensity Modeling</span><span class="r-skill-pill">Generative AI / LLMs</span><span class="r-skill-pill">Adobe Analytics</span><span class="r-skill-pill">GA360</span><span class="r-skill-pill">Tableau</span>
-            </div>
-          </div>
-          <div class="r-skills-group">
-            <h3>MarTech &amp; Platforms</h3>
-            <div class="r-skill-pills">
-              <span class="r-skill-pill hl">SAP Emarsys CDP</span><span class="r-skill-pill hl">Adobe Experience Manager</span><span class="r-skill-pill">Adobe Target</span><span class="r-skill-pill">Sabre SynXis</span><span class="r-skill-pill">Google Ads / Meta Ads</span><span class="r-skill-pill">Microsoft Azure</span><span class="r-skill-pill">Fliggy / Alibaba</span><span class="r-skill-pill">Jira / Agile / OKRs</span>
-            </div>
-          </div>
-          <div class="r-skills-group">
-            <h3>Leadership &amp; Strategy</h3>
-            <div class="r-skill-pills">
-              <span class="r-skill-pill hl">P&amp;L Management ($15M+)</span><span class="r-skill-pill hl">Board-Level Stakeholder Mgmt</span><span class="r-skill-pill">Team Building (20+ staff)</span><span class="r-skill-pill">Agency Negotiation &amp; In-housing</span><span class="r-skill-pill">Cross-Functional Alignment</span><span class="r-skill-pill">GDPR / PDPA Compliance</span><span class="r-skill-pill">Vendor Evaluation &amp; RFP</span>
-            </div>
-          </div>
-
-          <!-- Languages -->
-          <div class="r-skills-group">
-            <h3>Languages</h3>
-            <div class="r-lang-grid">
-              <div class="r-lang"><h4>English</h4><p>Native / Fluent</p><div class="r-lang-dots"><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div></div></div>
-              <div class="r-lang"><h4>Mandarin Chinese</h4><p>Native / Fluent</p><div class="r-lang-dots"><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div></div></div>
-              <div class="r-lang"><h4>Korean</h4><p>Intermediate (Seoul National Univ.)</p><div class="r-lang-dots"><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot on"></div><div class="r-lang-dot"></div><div class="r-lang-dot"></div></div></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- CERTIFICATIONS -->
-        <section class="r-section">
-          <div class="r-label">Credentials</div>
-          <h3 class="r-title">Certifications</h3>
-          <p class="r-desc">20+ certifications spanning AI/ML, data science, digital marketing, and business transformation.</p>
-          <div class="r-cert-grid">
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">NVIDIA: Fundamentals of Machine Learning</div><div class="r-cert-iss">Whizlabs</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">Digital Transformation</div><div class="r-cert-iss">BCG (via Coursera)</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">Machine Learning Basics</div><div class="r-cert-iss">Sungkyunkwan University</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">Data Literacy Certificate</div><div class="r-cert-iss">DataCamp</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">SQL Specialization (4 courses)</div><div class="r-cert-iss">DataCamp</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">SEO Specialization (4 courses)</div><div class="r-cert-iss">UC Davis (via Coursera)</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">LinkedIn Marketing (3 certifications)</div><div class="r-cert-iss">LinkedIn</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">Data Privacy Fundamentals</div><div class="r-cert-iss">Northeastern University</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2025</div><div class="r-cert-name">Intermediate ChatGPT &amp; Microsoft Copilot</div><div class="r-cert-iss">DataCamp</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2024</div><div class="r-cert-name">Financial Risk Management Principles</div><div class="r-cert-iss">Udemy</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2024</div><div class="r-cert-name">Introduction to Data Analytics</div><div class="r-cert-iss">Meta</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2024</div><div class="r-cert-name">What is Data Science?</div><div class="r-cert-iss">IBM</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2024</div><div class="r-cert-name">SMX Certificate of Attendance</div><div class="r-cert-iss">Search Engine Land</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2020</div><div class="r-cert-name">Data Ethics &amp; Digital Transformation (5 courses)</div><div class="r-cert-iss">LinkedIn Learning</div></div>
-            <div class="r-cert"><div class="r-cert-yr">2016</div><div class="r-cert-name">DoubleClick Search Fundamentals</div><div class="r-cert-iss">Google</div></div>
-          </div>
-        </section>
-
-        <!-- EDUCATION -->
-        <section class="r-section">
-          <div class="r-label">Education</div>
-          <h3 class="r-title">Academic Background</h3>
-          <div class="r-edu"><h3>B.A. Economics</h3><div class="r-edu-school">National University of Singapore</div><div class="r-edu-year">Graduated 2002 &middot; Passed with Merit &middot; GPA 3.4</div></div>
-          <div class="r-edu"><h3>Selected Postgraduate Modules in Knowledge Engineering</h3><div class="r-edu-school">NUS School of Computing</div><div class="r-edu-year">2009 – 2012</div><p>Data Mining, Neural Networks, Machine Learning, Knowledge-Based Systems Development, Genetic Algorithms, Case-Based Reasoning, IT Governance</p></div>
-          <div class="r-edu"><h3>Korean Language &amp; Culture Program (Levels I &amp; II)</h3><div class="r-edu-school">Seoul National University</div><div class="r-edu-year">Sep 2005 – May 2006</div></div>
-        </section>
-
-      </article>
-
-
-      <!--
-        - #PORTFOLIO
-      -->
-
-      <article class="portfolio" data-page="portfolio">
-
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-          </ul>
-
-          <div class="filter-select-box">
-            <button class="filter-select" data-select>
-              <div class="select-value" data-selecct-value>Select category</div>
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-            </button>
-            <ul class="select-list">
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
+            <ul>
+              <li style="margin-bottom: 8px;"><strong>Loyalty Transformation:</strong> Rebuilt Fraser World program, shifting bookings from 28% to 74%, saving a projected **$27.8M** in OTA commissions.</li>
+              <li style="margin-bottom: 8px;"><strong>Website Growth:</strong> Generated **56% YoY growth** in website room nights, pacing at 42% growth into 2024 (formally validated by COO).</li>
+              <li style="margin-bottom: 8px;"><strong>Technology Unification:</strong> Secured $5M board capital to deploy Emarsys CDP/CRM, Sabre booking systems, and unified 2.3M+ customer records.</li>
+              <li style="margin-bottom: 8px;"><strong>In-House Media Scaling:</strong> Transitioned $2M budget in-house. Reduced CPA by **22%** using predictive machine learning bidding models.</li>
             </ul>
           </div>
-
-          <ul class="project-list">
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-1.jpg" alt="MarTech Replatforming" loading="lazy">
-                </figure>
-                <h3 class="project-title">MarTech Replatforming (Multi-Million Board-Funded)</h3>
-                <p class="project-category">Secured multi-million dollar board-approved capital expenditure to completely rebuild Frasers Hospitality's marketing technology stack. Authored the 100-Day Digital Turnaround Deck that unlocked executive buy-in and funding approval. Integrated Adobe Experience Cloud, SAP Emarsys CDP/CRM, Sabre SynXis booking engine, and Microsoft Azure into a unified system supporting 70+ properties globally. Results: campaign time-to-launch reduced by 60%, manual operations cut by 70%, tagging compliance risk reduced to near-zero.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-2.jpg" alt="Digital Centre of Excellence" loading="lazy">
-                </figure>
-                <h3 class="project-title">Digital Centre of Excellence</h3>
-                <p class="project-category">Established an APAC Digital Centre of Excellence at Frasers Hospitality, spanning SEM, CRM, App, SEO, Web, and Business Intelligence functions. Built cross-functional team with certified expertise across Adobe, Meta, and Google Analytics 360 platforms. Introduced Agile methodology, Jira-based sprint management, and OKR goal-setting that accelerated campaign velocity fivefold with 30% faster sprint closure. Drove alignment between marketing, legal, product, and revenue operations via monthly digital governance council.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-3.jpg" alt="Loyalty Programme Transformation" loading="lazy">
-                </figure>
-                <h3 class="project-title">Loyalty Programme Transformation (28% → 74%)</h3>
-                <p class="project-category">Designed and led the loyalty and CRM programme that shifted Fraser World loyalty-sourced bookings from 28% to 74% — outperforming Marriott Bonvoy (70%), Hilton Honors (68-72%), and IHG Rewards (60-65%). Built segmentation logic using RFM and behavioural signals, journey automation via SAP Emarsys and CDP, and real-time offer engine with personalised pricing based on membership tier, recency, and transaction patterns. Members generated 30% higher Average Room Rate than non-members.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-4.jpg" alt="CRM Journey Automation" loading="lazy">
-                </figure>
-                <h3 class="project-title">CRM Journey Automation</h3>
-                <p class="project-category">Architected full CRM journey automation with real-time signal triggers across room type, geography, and channel behaviour. Built 40+ automated journeys using SAP Emarsys CDP, achieving 35% engagement lift compared to batch campaigns. Triggered journeys accounted for 60% of total CRM revenue. Enabled cross-channel retargeting — email openers dynamically retargeted on Meta and Google within 24 hours. Unified customer data from web, app, PMS, and booking engine into single actionable profile.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-5.jpg" alt="56% YoY Room Night Growth" loading="lazy">
-                </figure>
-                <h3 class="project-title">56% YoY Room Night Growth</h3>
-                <p class="project-category">Delivered 56% year-on-year growth in website room nights in 2023, pacing at 42% growth into 2024. Results externally validated by COO in formal recommendation letter. Projected website revenue trajectory showing 402% increase over three years via direct channel strategy. Key drivers: integrated martech stack, loyalty programme penetration, ML-based bidding, and continuous A/B testing. Transformed the website from secondary booking channel into primary revenue driver.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-6.jpg" alt="ML-Based Bidding & CPA Reduction" loading="lazy">
-                </figure>
-                <h3 class="project-title">ML-Based Bidding & 22% CPA Reduction</h3>
-                <p class="project-category">Transitioned paid media from agency to in-house management. Built and deployed machine learning-based bidding models and CPA throttling systems across Google, Meta, and DV360 — reducing cost per acquisition by 22%. ML models incorporated real-time signals including device type, time of day, geographic intent, booking window, and CRM segment membership. Built real-time reporting stack using GA360, Adobe Analytics, and SQL dashboards with weekly board-level KPI scorecards.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-7.jpg" alt="COVID Recovery Playbook" loading="lazy">
-                </figure>
-                <h3 class="project-title">COVID Recovery Playbook</h3>
-                <p class="project-category">Built comprehensive shutdown-to-recovery marketing playbook during COVID-19. Launched Fliggy (Alibaba) in just 4 weeks to capture China domestic recovery. Negotiated vendor payment deferrals for immediate cashflow relief. Maintained ≥80% brand impression share during shutdown. Converted downtime into measurable experiments: SEO remediation across 5 properties, geo-targeted offer testing. Launched Black Friday Flash Sale achieving ROAS 14.2 with 6,200 new loyalty sign-ups.</p>
-              </a>
-            </li>
-
-            <li class="project-item active">
-              <a href="#" onclick="return false;">
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-                  <img src="./assets/images/portfolio-8.jpg" alt="GDPR/PDPA Compliance" loading="lazy">
-                </figure>
-                <h3 class="project-title">GDPR/PDPA Compliance & Zero Data Breaches</h3>
-                <p class="project-category">Championed GDPR and PDPA compliance across Frasers Hospitality's global digital operations. Implemented comprehensive consent management layer, automated security patching protocols, and vendor access audit framework. Led privacy remediation in response to cookie deprecation and Schrems II. Shifted organisation to first-party-data-driven approach — reducing reliance on third-party cookies while strengthening customer trust. Result: zero data breaches across entire six-year tenure.</p>
-              </a>
-            </li>
-
-          </ul>
-
+          <p class="gold-color" style="font-size: 0.75em; margin-top: 20px;">⬇️ Swipe down for previous career history</p>
         </section>
 
-      </article>
-
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-          <p style="margin-bottom: 20px;">
-            <a href="https://tosingularity.substack.com/" target="_blank" rel="noopener" style="color: var(--orange-yellow-crayola); text-decoration: none;">
-              📚 Read more posts on Substack →
-            </a>
-          </p>
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="https://tosingularity.substack.com/p/whats-wrong-with-marketing-and-why" target="_blank" rel="noopener">
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.jpg" alt="Marketing" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <p class="blog-category">Marketing</p>
-                    <span class="dot"></span>
-                    <time datetime="2026-02-23">Feb 23, 2026</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">What's wrong with marketing and why marketing soon won't party like it's 2020</h3>
-                  <p class="blog-text">Correlation is how marketers prove ROI. Causation is how AI Agents will disprove it.</p>
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://tosingularity.substack.com/p/the-summary-future-of-hospitality" target="_blank" rel="noopener">
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Hospitality" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <p class="blog-category">Hospitality</p>
-                    <span class="dot"></span>
-                    <time datetime="2026-02-18">Feb 18, 2026</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">The Summary: Future of Hospitality and Hotel Distribution</h3>
-                  <p class="blog-text">What I think will happen in the next 5 years for hospitality distribution.</p>
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://tosingularity.substack.com/p/what-this-blog-will-cover-from-now" target="_blank" rel="noopener">
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Blog Direction" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <p class="blog-category">Updates</p>
-                    <span class="dot"></span>
-                    <time datetime="2026-02-04">Feb 4, 2026</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">What this blog will cover from now on</h3>
-                  <p class="blog-text">The cutting and pasting is over; the spell and grammar checks will begin soon.</p>
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://tosingularity.substack.com/p/the-rise-of-data-driven-demand-strategy" target="_blank" rel="noopener">
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="B2B Strategy" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <p class="blog-category">B2B Marketing</p>
-                    <span class="dot"></span>
-                    <time datetime="2026-01-31">Jan 31, 2026</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">The Rise of Data-Driven Demand Strategy for Mid-Market B2B</h3>
-                  <p class="blog-text">Multi-touch surround strategy with intent and context alignment.</p>
-                </div>
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://tosingularity.substack.com/p/seo-updated-for-2026" target="_blank" rel="noopener">
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="SEO" loading="lazy">
-                </figure>
-                <div class="blog-content">
-                  <div class="blog-meta">
-                    <p class="blog-category">SEO</p>
-                    <span class="dot"></span>
-                    <time datetime="2026-01-29">Jan 29, 2026</time>
-                  </div>
-                  <h3 class="h3 blog-item-title">SEO Updated for 2026</h3>
-                  <p class="blog-text">Times have changed, but customers still have options, just different ones.</p>
-                </div>
-              </a>
-            </li>
-
-          </ul>
-        </section>
-
-      </article>
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header style="display: flex; justify-content: space-between; align-items: center;">
-          <h2 class="h2 article-title">Contact</h2>
-          <a href="https://www.linkedin.com/in/mengliang/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(to bottom right, hsl(45, 100%, 72%), hsl(35, 100%, 68%)); color: #1b1b1b; padding: 10px 20px; border-radius: 14px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.25s ease;">
-            <ion-icon name="logo-linkedin" style="font-size: 18px;"></ion-icon>
-            <span>Connect on LinkedIn</span>
-          </a>
-        </header>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Get in touch</h3>
-
-          <form action="https://api.web3forms.com/submit" method="POST" class="form" data-form>
-
-            <input type="hidden" name="access_key" value="53ae550c-41ac-4e93-bb4e-986b6ddb9053">
-            <input type="hidden" name="subject" value="New message from mengliang10.github.io">
-            <input type="hidden" name="from_name" value="Portfolio Contact Form">
-            <input type="checkbox" name="botcheck" style="display:none;">
-
-            <div class="input-wrapper">
-              <input type="text" name="name" class="form-input" placeholder="Full name" required data-form-input>
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+        <!-- Slide 3.2: HomeAway -->
+        <section>
+          <h2>Experience: Head of Performance @ HomeAway</h2>
+          <p class="gold-color" style="text-align: left; font-size: 0.8em; margin-bottom: 20px; font-weight: 600;">Expedia Group | Mar 2016 – Sep 2018</p>
+          <div class="experience-card">
+            <div class="experience-card-header">
+              <h3>APAC Head of Performance Marketing</h3>
+              <span class="date">$15M Media P&amp;L</span>
             </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-          <p id="form-result" style="margin-top: 16px; font-size: 14px; display: none;"></p>
-
+            <ul>
+              <li style="margin-bottom: 10px;">Managed **$15M annual media spend** across 7 APAC markets. Led team of 8 across SEM, programmatic, paid social, and app lifecycle marketing.</li>
+              <li style="margin-bottom: 10px;">Orchestrated Japan GTM market entry, generating **$3M in Year 1 revenue** from a $1M budget (300% ROI).</li>
+              <li style="margin-bottom: 10px;">Pioneered value-based programmatic bidding with Expedia data science, driving **18% CAC reduction**.</li>
+              <li style="margin-bottom: 10px;">Designed automated persona retargeting, increasing dormant customer reactivation by 25%.</li>
+            </ul>
+          </div>
         </section>
 
-      </article>
+        <!-- Slide 3.3: Accor & TripAdvisor -->
+        <section>
+          <h2>Experience: Accor &amp; TripAdvisor</h2>
+          <div class="slide-layout-split">
+            <div class="col-left">
+              <div class="experience-card" style="height: 100%;">
+                <h4>AccorHotels</h4>
+                <p class="gold-color" style="font-size: 0.75em; margin-bottom: 10px;">APAC Head of Paid Search &amp; Analytics | 2013 – 2016</p>
+                <ul style="padding-left: 15px;">
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">Managed **$10M SEM portfolio** across 13 APAC markets.</li>
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">Renegotiated regional agency fees from 18% to 13%, saving **$1.4M annually**.</li>
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">Drove +14% average YoY room-night growth (+48% in Korea).</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-right">
+              <div class="experience-card" style="height: 100%;">
+                <h4>TripAdvisor</h4>
+                <p class="gold-color" style="font-size: 0.75em; margin-bottom: 10px;">Senior Search Marketing Analyst | 2010 – 2012</p>
+                <ul style="padding-left: 15px;">
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">First APAC digital marketing hire. Deployed foundational acquisition structures.</li>
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">Automated keyword management across **10M+ search terms**.</li>
+                  <li style="font-size: 0.75em; margin-bottom: 6px;">Developed early algorithmic bidding models using regression analysis.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 3.4: Earlier Roles -->
+        <section>
+          <h2>Earlier Career Milestones</h2>
+          <div class="experience-card" style="font-size: 0.95em;">
+            <ul style="padding-left: 20px;">
+              <li style="margin-bottom: 12px;"><strong>GroupM (2010):</strong> SEM Lead, APACJ. Managed US$10M SEM budget for Dell's consumer and enterprise divisions. Delivered 20% ROI improvements.</li>
+              <li style="margin-bottom: 12px;"><strong>Singapore Press Holdings (2008-2010):</strong> Digital Marketing Executive. Onboarded 100+ SME advertisers onto the self-serve platform. Achieved 88% YoY digital ad growth.</li>
+              <li style="margin-bottom: 12px;"><strong>Prince Flower Shop (2004-2008):</strong> DTC E-commerce &amp; Marketing Lead. Built one of Singapore's earliest flower DTC e-commerce sites, including custom Excel-based CRM databases.</li>
+              <li style="margin-bottom: 12px;"><strong>Raffles International Hotels (2003-2004):</strong> CRM Marketing Executive. Managed CRM initiatives across 12 luxury properties. Ran Singapore's earliest email A/B testing campaigns.</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 4: Portfolio / Projects
+           ========================================== -->
+      <section>
+        <!-- Slide 4.1: Key Martech Case Studies -->
+        <section>
+          <h2>Key MarTech Project Studies</h2>
+          <div class="project-grid-3">
+            <div class="project-card-detail">
+              <h3>MarTech Replatforming</h3>
+              <p>Integrated Adobe Experience Cloud, SAP Emarsys CDP, Sabre SynXis, and Azure across 70+ properties.</p>
+              <div class="metrics">60% faster launch &middot; 70% ops cut</div>
+            </div>
+            <div class="project-card-detail">
+              <h3>Loyalty Transformation</h3>
+              <p>Re-designed Fraser World CRM/loyalty segmentation using RFM and real-time offer engines.</p>
+              <div class="metrics">28% → 74% bookings &middot; +30% ADR</div>
+            </div>
+            <div class="project-card-detail">
+              <h3>Digital Centre of Excellence</h3>
+              <p>Built regional CoE spanning SEM, CRM, App, and BI. Deployed Agile Jira-based project workflows.</p>
+              <div class="metrics">5X campaign velocity</div>
+            </div>
+          </div>
+          <p class="gold-color" style="font-size: 0.75em; margin-top: 20px;">⬇️ Swipe down for Data Science &amp; Web Projects</p>
+        </section>
+
+        <!-- Slide 4.2: Data Science & Web -->
+        <section>
+          <h2>Data Science &amp; Web Development</h2>
+          <div class="project-grid-3">
+            <div class="project-card-detail">
+              <h3>AI Purchase Prediction</h3>
+              <p>Built end-to-end Python pipeline using LightGBM predicting purchase probability from 12k+ sessions.</p>
+              <div class="metrics">67.6% F1 &middot; 82.4% Recall</div>
+            </div>
+            <div class="project-card-detail">
+              <h3>Service Apartment Web</h3>
+              <p>Frontend responsive HTML5 and CSS application showcasing luxury branding on GitHub Pages.</p>
+              <div class="metrics">Live Responsive Demo</div>
+            </div>
+            <div class="project-card-detail">
+              <h3>UX Redesign 2024</h3>
+              <p>Mobile-first user journey redesign mapping 36 core UX screens across global properties.</p>
+              <div class="metrics">36 Screen Journey Map</div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 5: Blog
+           ========================================== -->
+      <section>
+        <section>
+          <h2>Substack Technical Blog</h2>
+          <p style="text-align: left; font-size: 0.85em; margin-bottom: 20px;">
+            I write detailed perspectives on AI agents, Martech stack unifications, and search visibility.
+            <a href="https://tosingularity.substack.com/" target="_blank" class="gold-color">📚 Visit tosingularity.substack.com →</a>
+          </p>
+          
+          <div class="blog-list">
+            <div class="blog-item">
+              <div class="blog-item-meta">Marketing &middot; Feb 2026</div>
+              <h3>What's wrong with marketing and why party won't last</h3>
+              <p>How AI Agents will shift correlation-based ROI validation into strict causal proofs.</p>
+            </div>
+            <div class="blog-item">
+              <div class="blog-item-meta">Hospitality &middot; Feb 2026</div>
+              <h3>Future of Hospitality and Distribution</h3>
+              <p>My five-year predictions for hotel distribution layers and OTA channels.</p>
+            </div>
+            <div class="blog-item">
+              <div class="blog-item-meta">B2B Strategy &middot; Jan 2026</div>
+              <h3>Mid-Market B2B Demand Strategies</h3>
+              <p>Formulating multi-touch surround strategies with context and intent alignment.</p>
+            </div>
+            <div class="blog-item">
+              <div class="blog-item-meta">SEO &middot; Jan 2026</div>
+              <h3>SEO Updated for 2026</h3>
+              <p>Adapting search footprints to win featured placements in AI engine queries.</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- ==========================================
+           SLIDE 6: Contact
+           ========================================== -->
+      <section>
+        <section>
+          <h2>Get in Touch</h2>
+          <p style="font-size: 0.85em; margin-bottom: 20px;">Have an upcoming project, fractional requirement, or inquiry? Drop me a message.</p>
+          
+          <div class="contact-form">
+            <form action="https://api.web3forms.com/submit" method="POST" id="portfolio-form">
+              <input type="hidden" name="access_key" value="53ae550c-41ac-4e93-bb4e-986b6ddb9053">
+              <input type="hidden" name="subject" value="New message from reveal.js portfolio">
+              <input type="hidden" name="from_name" value="Portfolio Reveal.js Form">
+              <input type="checkbox" name="botcheck" style="display:none;">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" name="name" class="form-input" placeholder="Full name" required id="form-name">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-input" placeholder="Email address" required id="form-email">
+                </div>
+              </div>
+
+              <textarea name="message" class="form-textarea" placeholder="Your Message" required id="form-message"></textarea>
+
+              <button class="form-btn" type="submit" id="form-submit-btn">Send Message</button>
+            </form>
+            <p id="form-status" style="margin-top: 15px; font-size: 0.85em; display: none; color: var(--accent);"></p>
+          </div>
+        </section>
+      </section>
 
     </div>
+  </div>
 
-  </main>
+  <!-- Reveal.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
 
+  <script>
+    // Initialize Reveal.js
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      center: true,
+      hash: true,
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+      width: 1100,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0
+    });
 
-  <script src="./assets/js/script.js"></script>
+    // Custom Navbar Slide Sync
+    function goToSlide(h, v) {
+      Reveal.slide(h, v);
+    }
 
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    // Update navbar active state on slide change
+    Reveal.on('slidechanged', event => {
+      const activeIdx = event.indexh;
+      const navIds = ['link-fractional', 'link-resume', 'link-portfolio', 'link-blog', 'link-contact'];
+      
+      navIds.forEach((id, idx) => {
+        const link = document.getElementById(id);
+        if (!link) return;
+        if (idx === (activeIdx - 1)) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
 
+    // Prevent slide changes while typing in the form
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('keydown', e => {
+        e.stopPropagation();
+      });
+    });
+
+    // Form Submission Handling
+    const form = document.getElementById('portfolio-form');
+    const statusText = document.getElementById('form-status');
+    const submitBtn = document.getElementById('form-submit-btn');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending...';
+      statusText.style.display = 'block';
+      statusText.style.color = 'var(--text-secondary)';
+      statusText.innerText = 'Submitting form...';
+
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let jsonRes = await response.json();
+        if (response.status == 200) {
+          statusText.style.color = 'var(--accent)';
+          statusText.innerText = 'Thank you! Your message was sent successfully.';
+          form.reset();
+        } else {
+          statusText.style.color = '#ef4444'; // Red
+          statusText.innerText = jsonRes.message || 'Something went wrong. Please try again.';
+        }
+      })
+      .catch(error => {
+        statusText.style.color = '#ef4444';
+        statusText.innerText = 'Network error. Please check your connection and try again.';
+      })
+      .then(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Send Message';
+      });
+    });
+  </script>
 </body>
 
 </html>
